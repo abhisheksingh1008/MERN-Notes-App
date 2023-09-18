@@ -1,0 +1,105 @@
+.update-note-canvas {
+  padding: 0 2.5rem;
+}
+
+.update-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.note-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left: 0.15rem;
+}
+
+.update-options-left {
+  max-width: 65%;
+}
+
+.update-option {
+  padding: 0.25rem 0.6rem;
+  border: none;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.update-options button:hover {
+  background-color: rgb(231, 228, 228);
+}
+
+.images-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.image-item-container {
+  position: relative;
+}
+
+.image-container {
+  width: 6rem;
+  height: 6rem;
+  text-align: center;
+  padding: 0.25rem;
+  border: 2px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: scale-down;
+}
+
+.image-delete-button {
+  cursor: pointer;
+  padding: 0.15rem 0.25rem;
+  padding-bottom: 0.1rem;
+  background-color: transparent;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+}
+
+.image-delete-button:hover {
+  background-color: #3ea7d0;
+}
+
+.image-preview-container {
+  width: 43%;
+  height: 26rem;
+  text-align: center;
+  padding: 0.25rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .image-preview-container {
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .update-note-canvas {
+    padding: 0 0.25rem;
+  }
+
+  .image-preview-container {
+    width: 100%;
+  }
+}

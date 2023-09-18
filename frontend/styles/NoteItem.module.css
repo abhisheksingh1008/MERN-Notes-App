@@ -1,0 +1,82 @@
+.note {
+  margin: 0.55rem 0.35rem;
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 7px;
+  position: relative;
+  padding-right: 1rem;
+  /* height: 6rem; */
+  background: #1f6e8c;
+  box-shadow: 0px 0px 10px 2px rgb(175, 173, 173);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", "Geneva", "Verdana", "sans-serif";
+}
+
+.note-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0.2rem;
+}
+
+.note-description {
+  /* border: 3px solid black; */
+  margin: 0.15rem;
+  margin-top: 0.3rem;
+}
+
+.more-options:hover ul {
+  display: block;
+}
+
+.more-options-icon {
+  position: absolute;
+  top: 6px;
+  right: 5px;
+  font-size: 1.5rem;
+}
+
+.more-options ul {
+  margin: 0;
+  padding: 0.2rem 0;
+  list-style: none;
+  display: none;
+  z-index: 10;
+  background-color: white;
+  border: 1px solid rgb(219, 216, 216);
+  border-radius: 6px;
+  /* box-shadow: 1px 1px 5px 1px rgb(229, 227, 227); */
+  position: absolute;
+  top: 25px;
+  right: -6px;
+}
+
+.more-options-list li {
+  margin: 0.2rem 0;
+}
+
+.more-options-list button {
+  display: flex;
+  align-items: center;
+  padding: 0.1rem 0.3rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+.more-options-list button:hover {
+  background-color: rgb(234, 232, 232);
+}
+
+.button-icon {
+  font-size: 1rem;
+  margin: 0rem 0.15rem;
+  padding-top: 0.22rem;
+  margin-right: 0.3rem;
+}
+
+.button-text {
+  font-size: 1rem;
+}

@@ -1,0 +1,36 @@
+.landing-wrapper {
+  text-align: center;
+  min-height: 100vh;
+  background-image: url("../public/landing-page-image.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.page-content {
+  position: absolute;
+  top: 28%;
+  left: 6rem;
+}
+
+.heading {
+  margin: 2rem auto;
+  font-size: 2.2rem;
+}
+
+.button {
+  color: white;
+  padding: 0.4rem 1.15rem;
+  font-size: 1.35rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  background-color: rgb(129, 58, 196);
+  margin: auto;
+}
+
+.button:hover {
+  color: rgb(247, 247, 247);
+  background-color: rgb(142, 73, 206);
+  border: 1px solid rgb(100, 8, 185);
+}
