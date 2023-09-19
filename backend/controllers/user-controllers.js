@@ -17,7 +17,6 @@ const getUsers = async (req, res, next) => {
         userId: user._id,
         name: user.name,
         email: user.email,
-        image: user.image,
         isAdmin: user.isAdmin,
       };
     });
@@ -35,11 +34,11 @@ const getUsers = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
-  if (email.length === 0) {
+  if (!email || email.length === 0) {
     return next(new HttpError("Email cannot be empty.", 400));
   }
 
-  if (password.length === 0) {
+  if (!password || password.length === 0) {
     return next(new HttpError("Password cannot be empty.", 400));
   }
 
@@ -73,7 +72,6 @@ const login = async (req, res, next) => {
         userId: existingUser._id,
         name: existingUser.name,
         email: existingUser.email,
-        image: existingUser.image,
         isAdmin: existingUser.isAdmin,
         prefersGridView: existingUser.prefersGridView,
         token,
@@ -87,15 +85,15 @@ const login = async (req, res, next) => {
 const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
 
-  if (name.trim().length === 0) {
+  if (!name || name.trim().length === 0) {
     return next(new HttpError("Name cannot be empty.", 400));
   }
 
-  if (email.trim().length === 0) {
+  if (!email || email.trim().length === 0) {
     return next(new HttpError("Email cannot be empty.", 400));
   }
 
-  if (password.trim().length === 0) {
+  if (!password || password.trim().length === 0) {
     return next(new HttpError("Password cannot be empty.", 400));
   }
 
@@ -130,7 +128,6 @@ const signup = async (req, res, next) => {
         userId: createdUser._id,
         name: createdUser.name,
         email: createdUser.email,
-        image: createdUser.image,
         isAdmin: createdUser.isAdmin,
         prefersGridView: createdUser.prefersGridView,
         token,
@@ -160,7 +157,6 @@ const getUserById = async (req, res, next) => {
         userId: existingUser._id,
         name: existingUser.name,
         email: existingUser.email,
-        image: existingUser.image,
         isAdmin: existingUser.isAdmin,
         prefersGridView: existingUser.prefersGridView,
       },
@@ -259,7 +255,6 @@ const updateUser = async (req, res, next) => {
 };
 
 const deleteUser = async (req, res, next) => {
-  //   const email = req.user.email;
   const userId = req.params.userId;
 
   try {

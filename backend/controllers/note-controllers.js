@@ -112,6 +112,18 @@ const getNoteById = async (req, res, next) => {
 const createNote = async (req, res, next) => {
   const { title, description, images } = req.body;
 
+  if (!title || title.trim().length === 0) {
+    return next(new HttpError("Title cannot be empty.", 400));
+  }
+
+  if (!description || description.trim().length === 0) {
+    return next(new HttpError("Title cannot be empty.", 400));
+  }
+
+  if (!images) {
+    images = [];
+  }
+
   try {
     const createdNote = new Note({
       title,

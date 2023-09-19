@@ -19,9 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", userRoutes);
 app.use("/api", noteRoutes);
 
-// app.get("/", (req, res, next) => {
-//   res.send("Get request from the home page");
-// });
+app.get("/", (req, res, next) => {
+  res.send("API is running...");
+});
 
 app.use(notFound);
 app.use(errorHandler);
