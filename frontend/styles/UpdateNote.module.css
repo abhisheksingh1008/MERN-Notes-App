@@ -9,6 +9,12 @@
   margin: 1rem 0;
 }
 
+.update-options-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .note-title {
   font-size: 1.5rem;
   font-weight: bold;

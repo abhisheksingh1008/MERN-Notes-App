@@ -12,6 +12,7 @@ import { BiArchiveIn, BiArchiveOut } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { TfiSave } from "react-icons/tfi";
 import { LuEdit } from "react-icons/lu";
+import { IoArrowBack } from "react-icons/io5";
 import toast from "react-hot-toast";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import NoteImageItem from "@/components/NoteImageItem";
@@ -159,6 +160,16 @@ const EditNote = ({ params }) => {
           <>
             <div className={style["update-options"]}>
               <span className={style["update-options-left"]}>
+                <IoArrowBack
+                  style={{
+                    fontSize: "1.5rem",
+                    marginRight: "0.25rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    router.back();
+                  }}
+                />
                 <span className={style["note-title"]}>{note.title}</span>
               </span>
               <span className={style["update-options-right"]}>
