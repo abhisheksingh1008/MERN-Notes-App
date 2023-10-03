@@ -2,14 +2,15 @@
 
 import { useState, useContext, useEffect } from "react";
 
-import useInput from "@/hooks/useInput";
 import Card from "@/components/Card";
+import useInput from "@/hooks/useInput";
 import classes from "@/styles/Form.module.css";
 import buttonClasses from "@/styles/Button.module.css";
-import { useRouter } from "next/navigation";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import AuthContext from "@/store/auth-context";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const Signup = () => {
   const [formIsSubmitting, setFormIsSubmitting] = useState(false);
@@ -160,7 +161,7 @@ const Signup = () => {
               disabled={formIsSubmitting}
               className={`${classes["form-action"]} ${buttonClasses.button}`}
             >
-              {formIsSubmitting ? "Submitting..." : "Register"}
+              {formIsSubmitting ? <LoadingSpinner /> : "Register"}
             </button>
           </div>
           <div className={`${classes.login} ${classes["form-action"]}`}>

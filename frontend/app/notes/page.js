@@ -2,6 +2,7 @@
 
 import { useContext, useState, useEffect } from "react";
 
+import { useRouter } from "next/navigation";
 import useNote from "@/hooks/useNote";
 import AuthContext from "@/store/auth-context";
 import NoteItem from "@/components/NoteItem";
@@ -16,6 +17,13 @@ import toast from "react-hot-toast";
 
 const Notes = () => {
   const authCtx = useContext(AuthContext);
+  const router = useRouter();
+
+  if (!authCtx.user) {
+    router.push("/");
+    return;
+  }
+
   const noteHook = useNote();
 
   const [notes, setNotes] = useState([]);
@@ -120,6 +128,10 @@ const Notes = () => {
           </div>
           {isFetching ? (
             <LoadingSpinner className={classes.loader} />
+          ) : isError ? (
+            <div className={classes.error}>
+              Something went wrong. Couldn't fetch notes. {errorMessage}
+            </div>
           ) : notes.length > 0 ? (
             <ul
               className={
@@ -148,14 +160,17 @@ const Notes = () => {
               ))}
             </ul>
           ) : (
-            <div style={{ textAlign: "center" }}>No notes here.</div>
+            <div style={{ textAlign: "center" }}>
+              No notes here,{" "}
+              <Link
+                href={"/new-note"}
+                style={{ color: "blue", textDecoration: "underline" }}
+              >
+                add one.
+              </Link>
+            </div>
           )}
         </div>
-        {isError && (
-          <div className={classes.error}>
-            Something went wrong. Couldn't fetch notes. {errorMessage}
-          </div>
-        )}
       </section>
     </div>
   );

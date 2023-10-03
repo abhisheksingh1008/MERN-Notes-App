@@ -30,13 +30,19 @@
   font-weight: bold;
 }
 
+.notes-ui-options {
+  display: flex;
+}
+
 .notes-ui-option {
-  padding: 0.5rem 0.6rem;
+  padding: 0.55rem 0.5rem;
   border: none;
   border-radius: 6px;
   background-color: white;
   cursor: pointer;
-  margin-left: 0.5rem;
+  margin-left: 0.3rem;
+  display: grid;
+  place-items: center;
 }
 
 .notes-ui-option:hover {

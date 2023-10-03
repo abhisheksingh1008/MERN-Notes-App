@@ -7,8 +7,9 @@ import AuthContext from "@/store/auth-context";
 import Card from "@/components/Card";
 import classes from "@/styles/Form.module.css";
 import buttonClasses from "@/styles/Button.module.css";
-import Link from "next/link";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const initialFormData = {
   email: "",
@@ -21,11 +22,11 @@ const Login = () => {
   const authCtx = useContext(AuthContext);
   const router = useRouter();
 
-  const [form, setForm] = useState(initialFormData);
+  const [formData, setFormData] = useState(initialFormData);
   const [showPassword, setShowPassword] = useState(false);
 
   const inputChangeHandler = (event) => {
-    setForm((prev) => {
+    setFormData((prev) => {
       return {
         ...prev,
         [event.target.name]: event.target.value,
@@ -36,7 +37,7 @@ const Login = () => {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
 
-    setForm((prev) => {
+    setFormData((prev) => {
       return {
         ...prev,
         isSubmitting: true,
@@ -53,8 +54,8 @@ const Login = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: form.email,
-            password: form.password,
+            email: formData.email,
+            password: formData.password,
           }),
         }
       );
@@ -73,7 +74,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      setForm((prev) => {
+      setFormData((prev) => {
         return {
           ...prev,
           errorMessage: error.message,
@@ -81,7 +82,7 @@ const Login = () => {
       });
     }
 
-    setForm((prev) => {
+    setFormData((prev) => {
       return {
         ...prev,
         isSubmitting: false,
@@ -106,7 +107,7 @@ const Login = () => {
               type="text"
               id="email"
               name="email"
-              value={form.email}
+              value={formData.email}
               onChange={inputChangeHandler}
               required
               autoFocus
@@ -119,7 +120,7 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
-                value={form.password}
+                value={formData.password}
                 onChange={inputChangeHandler}
                 style={{ paddingRight: "4rem" }}
                 required
@@ -138,10 +139,28 @@ const Login = () => {
           <div className={classes["form-actions"]}>
             <button
               type="submit"
-              disabled={form.isSubmitting}
+              disabled={formData.isSubmitting}
               className={`${classes["form-action"]} ${buttonClasses.button}`}
             >
-              {form.isSubmitting ? "Submitting..." : "Login"}
+              {formData.isSubmitting ? <LoadingSpinner /> : "Login"}
+            </button>
+            <button
+              type="button"
+              disabled={formData.isSubmitting}
+              className={`${classes["form-action"]} ${buttonClasses.button}`}
+              onClick={() => {
+                setFormData((prev) => ({
+                  ...prev,
+                  email: "guestuser@example.com",
+                  password: "12345678",
+                }));
+              }}
+            >
+              {formData.isSubmitting ? (
+                <LoadingSpinner />
+              ) : (
+                "Get guest user credentials"
+              )}
             </button>
           </div>
           <div className={`${classes.register} ${classes["form-action"]}`}>
@@ -150,8 +169,8 @@ const Login = () => {
               Sign up
             </Link>
           </div>
-          {form.errorMessage && (
-            <div className={classes.error}>{form.errorMessage}</div>
+          {formData.errorMessage && (
+            <div className={classes.error}>{formData.errorMessage}</div>
           )}
         </div>
       </form>

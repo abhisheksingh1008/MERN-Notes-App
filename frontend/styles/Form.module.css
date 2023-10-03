@@ -34,12 +34,12 @@
   background-color: rgb(243, 213, 243);
 }
 
-.form-actions {
-  display: flex;
+.form-actions button {
+  min-width: 100%;
 }
 
 .form-action {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   margin-right: 1rem;
 }
 

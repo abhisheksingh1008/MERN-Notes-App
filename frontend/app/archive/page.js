@@ -2,6 +2,7 @@
 
 import { useContext, useState, useEffect } from "react";
 
+import { useRouter } from "next/navigation";
 import useNote from "@/hooks/useNote";
 import classes from "@/styles/Notes.module.css";
 import AuthContext from "@/store/auth-context";
@@ -13,6 +14,13 @@ import toast from "react-hot-toast";
 
 const Archive = () => {
   const authCtx = useContext(AuthContext);
+  const router = useRouter();
+
+  if (!authCtx.user) {
+    router.push("/");
+    return;
+  }
+
   const noteHook = useNote();
 
   const [archivedNotes, setArchivedNotes] = useState([]);
@@ -111,40 +119,39 @@ const Archive = () => {
           </div>
           {isFetching ? (
             <LoadingSpinner className={classes.loader} />
-          ) : (
-            archivedNotes.length > 0 && (
-              <ul
-                className={
-                  !authCtx.user?.prefersGridView
-                    ? `${classes["notes-list"]}`
-                    : `${classes["notes-list"]} ${classes["grid-view"]}`
-                }
-              >
-                {pinnedNotes.map((note) => (
-                  <NoteItem
-                    key={note._id}
-                    note={note}
-                    onTogglePin={togglePinHandler}
-                    onToggleArchive={unarchiveNoteHandler}
-                    onDelete={deleteNoteHandler}
-                  />
-                ))}
-                {unpinnedNotes.map((note) => (
-                  <NoteItem
-                    key={note._id}
-                    note={note}
-                    onTogglePin={togglePinHandler}
-                    onToggleArchive={unarchiveNoteHandler}
-                    onDelete={deleteNoteHandler}
-                  />
-                ))}
-              </ul>
-            )
-          )}
-          {isError && (
+          ) : isError ? (
             <div className={classes.error}>
               Something went wrong. Couldn't fetch notes. {errorMessage}
             </div>
+          ) : archivedNotes.length > 0 ? (
+            <ul
+              className={
+                !authCtx.user?.prefersGridView
+                  ? `${classes["notes-list"]}`
+                  : `${classes["notes-list"]} ${classes["grid-view"]}`
+              }
+            >
+              {pinnedNotes.map((note) => (
+                <NoteItem
+                  key={note._id}
+                  note={note}
+                  onTogglePin={togglePinHandler}
+                  onToggleArchive={unarchiveNoteHandler}
+                  onDelete={deleteNoteHandler}
+                />
+              ))}
+              {unpinnedNotes.map((note) => (
+                <NoteItem
+                  key={note._id}
+                  note={note}
+                  onTogglePin={togglePinHandler}
+                  onToggleArchive={unarchiveNoteHandler}
+                  onDelete={deleteNoteHandler}
+                />
+              ))}
+            </ul>
+          ) : (
+            <div style={{ textAlign: "center" }}>No notes in archive.</div>
           )}
         </div>
       </section>
