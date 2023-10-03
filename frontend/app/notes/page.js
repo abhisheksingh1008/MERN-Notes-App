@@ -19,11 +19,6 @@ const Notes = () => {
   const authCtx = useContext(AuthContext);
   const router = useRouter();
 
-  if (!authCtx.user) {
-    router.push("/");
-    return;
-  }
-
   const noteHook = useNote();
 
   const [notes, setNotes] = useState([]);
@@ -84,6 +79,11 @@ const Notes = () => {
   };
 
   useEffect(() => {
+    if (!authCtx.user) {
+      router.push("/");
+      return;
+    }
+
     fetchNotesByUserId();
   }, []);
 

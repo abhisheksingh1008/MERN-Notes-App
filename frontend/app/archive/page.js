@@ -16,11 +16,6 @@ const Archive = () => {
   const authCtx = useContext(AuthContext);
   const router = useRouter();
 
-  if (!authCtx.user) {
-    router.push("/");
-    return;
-  }
-
   const noteHook = useNote();
 
   const [archivedNotes, setArchivedNotes] = useState([]);
@@ -82,6 +77,11 @@ const Archive = () => {
   };
 
   useEffect(() => {
+    if (!authCtx.user) {
+      router.push("/");
+      return;
+    }
+
     fetchArchivedNotesByUserId();
   }, []);
 
